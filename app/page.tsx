@@ -24,7 +24,7 @@ const ChatMessage = ({ text, from }: MessageProps) => {
   return (
     <>
       {from == Creator.me && (
-        <div className="bg-white p-4 rounded-lg flex gap-4 items-center whitespace-pre-wrap">
+        <div className="bg-white p-4 rounded-lg flex gap-4 items-center whitespace-pre-wrap mb-1 mt-1">
           <Image
             src={userPic}
             alt="User"
@@ -34,7 +34,7 @@ const ChatMessage = ({ text, from }: MessageProps) => {
         </div>
       )}
       {from == Creator.bot && (
-        <div className="bg-gray-100 p-4 rounded-lg flex gap-4 items-center whitespace-pre-wrap">
+        <div className="bg-gray-100 p-4 rounded-lg flex gap-4 items-center whitespace-pre-wrap mt-1 mb-1">
           <Image src={botPic} alt="Bot" className="rounded-full w-10 h-10" />
           <p className="text-gray-800">{text}</p>
         </div>
@@ -132,7 +132,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: input + ",Answer as a neanderthal would.",
+        prompt: input + ",Answer as a neanderthal",
       }),
     }).then((response) => response.json());
     setLoading(false);
@@ -156,15 +156,24 @@ export default function Home() {
 
   return (
     <main className="relative max-w-2xl mx-auto">
-      <h1 className="text-4xl font-bold text-center mt-10">Ask Bing-Bong</h1>
-      <div className="sticky top-0 w-full pt-10 px-4">
-        <ChatInput onSend={(input) => callApi(input)} disabled={loading} />
-      </div>
+      <h1 className="text-4xl font-bold text-center mt-10 text-gray-800 dark:text-gray-100">
+        Ask Bing-Bong
+      </h1>
+      <p className="text-center text-gray-500 mt-2 dark:text-gray-400">
+        Me Bong, you ask
+      </p>
 
-      <div className="mt-10 px-4">
-        {messages.map((msg: MessageProps) => (
-          <ChatMessage key={msg.key} text={msg.text} from={msg.from} />
-        ))}
+      <div className="flex flex-col h-screen overflow-y-auto px-2 py-2 mt-10 max-h-1/2 pb-72">
+        <div className="mt-10 px-4">
+          {messages.map((msg: MessageProps) => (
+            <ChatMessage key={msg.key} text={msg.text} from={msg.from} />
+          ))}
+        </div>
+      </div>
+      <div className="fixed bottom-0 left-0 right-0 max-w-2xl rounded-t-lg mx-auto bg-white dark:bg-gray-900 pb-4 md: w-11/12">
+        <div className="sticky w-full">
+          <ChatInput onSend={(input) => callApi(input)} disabled={loading} />
+        </div>
       </div>
     </main>
   );
