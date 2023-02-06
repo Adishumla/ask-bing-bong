@@ -170,7 +170,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <div className="fixed bottom-0 left-0 right-0 max-w-2xl rounded-t-lg mx-auto bg-white dark:bg-gray-900 pb-4 md: w-11/12">
+      <div className="fixed bottom-0 left-0 right-0 max-w-2xl h-auto rounded-t-lg mx-auto bg-white dark:bg-gray-900 pb-4 md: w-11/12">
         <div className="sticky w-full">
           <ChatInput onSend={(input) => callApi(input)} disabled={loading} />
         </div>
