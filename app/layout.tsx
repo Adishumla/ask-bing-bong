@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="dark:bg-gray-900 overflow-hidden h-screen w-screen"
+      className="dark:bg-gray-900 overflow-hidden h-screen w-screen border-box overscroll-none"
     >
       {/*
         <head /> will contain the components returned by the nearest parent
